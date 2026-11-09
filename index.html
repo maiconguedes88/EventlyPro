@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Evently</title>
+<link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#2b1f24"><link rel="icon" href="/icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/icon-192.png">
+<style>
+:root{--bg:#faf7f5;--sf:#fff;--tx:#2a2320;--mu:#7a6f69;--ac:#9b4d63;--ac2:#f4e4e9;--bd:#e8dfda;--ok:#2e7d5b;--wa:#b8700f;--er:#b3382c;--nv:#2b1f24;--ni:#ecdde2;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1b1617;--sf:#272021;--tx:#f1e9e6;--mu:#a99d98;--ac:#e08aa3;--ac2:#3a2830;--bd:#3a3032;--ok:#5cc496;--wa:#e5a64d;--er:#ef7b6e;--nv:#110c0e;--ni:#ecdde2;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1b1617;--sf:#272021;--tx:#f1e9e6;--mu:#a99d98;--ac:#e08aa3;--ac2:#3a2830;--bd:#3a3032;--ok:#5cc496;--wa:#e5a64d;--er:#ef7b6e;--nv:#110c0e;--ni:#ecdde2;color-scheme:dark}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:var(--bg);color:var(--tx);font:16px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding-bottom:84px}
+h2,h3{margin:0}h2{font-size:1.3rem}h3{font-size:1.05rem}p{margin:.3rem 0}
+header{padding:14px 16px;font-weight:700;color:var(--ac);font-size:1.15rem;border-bottom:1px solid var(--bd);background:var(--sf)}
+header small{color:var(--mu);font-weight:400;margin-left:6px}
+#main{max-width:900px;margin:0 auto;padding:16px}
+#nav{position:fixed;left:0;right:0;bottom:0;display:flex;background:var(--nv);border-top:1px solid #0003;padding:4px 4px calc(4px + env(safe-area-inset-bottom,0px));z-index:20}
+#nav button{flex:1;border:0;background:none;color:var(--ni);font:inherit;font-size:.66rem;padding:6px 2px;border-radius:10px;cursor:pointer}
+#nav button .ic{display:block;margin:0 auto 2px}#nav button.on{color:#fff;background:var(--ac);font-weight:600}.ic{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+@media(min-width:800px){body{padding:0 0 0 190px}header{margin-left:-190px;padding-left:206px}#nav{top:0;right:auto;width:190px;flex-direction:column;border-top:0;border-right:0;padding:12px 10px 10px}#nav button{flex:none;display:flex;align-items:center;gap:10px;font-size:.92rem;text-align:left;height:38px;padding:0 12px;margin-bottom:2px}#nav button .ic{display:inline;margin:0;width:20px;height:20px}#nav .logo{display:flex}.hl{display:none}body.out{padding:0}body.out header{margin:0;padding-left:16px}}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:14px 0 8px;flex-wrap:wrap}
+.card,.item{background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:12px 14px;margin-bottom:8px}
+.item{display:flex;justify-content:space-between;align-items:center;gap:10px}.item small{display:block;color:var(--mu)}
+.item.click{cursor:pointer}.acts{display:flex;gap:6px;flex-shrink:0;flex-wrap:wrap;justify-content:flex-end}
+.btn{border:1px solid var(--bd);background:var(--sf);color:var(--tx);border-radius:9px;padding:8px 12px;font:inherit;font-size:.9rem;cursor:pointer;min-height:40px}
+.btn.pri{background:var(--ac);border-color:var(--ac);color:#fff}.btn.dng{color:var(--er)}.btn.ok{color:var(--ok);border-color:var(--ok)}.btn.wa{color:var(--wa);border-color:var(--wa)}
+.btn.big{min-height:48px;min-width:112px;font-weight:600}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:6px}
+.stat{background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:12px}.stat b{display:block;font-size:1.35rem}.stat small{color:var(--mu)}
+.badge{display:inline-block;font-size:.75rem;padding:2px 8px;border-radius:99px;background:var(--ac2);color:var(--ac);font-weight:600}
+.badge.ok{color:var(--ok)}.badge.er{color:var(--er)}.badge.wa{color:var(--wa)}
+.mu{color:var(--mu)}.val{font-weight:700;white-space:nowrap}
+.search,select,input,textarea{width:100%;border:1px solid var(--bd);background:var(--bg);color:var(--tx);border-radius:9px;padding:10px;font:inherit;margin-bottom:8px}
+label{display:block;font-size:.85rem;color:var(--mu)}label input,label select,label textarea{margin-top:3px;color:var(--tx)}
+.prog{height:10px;border-radius:9px;background:var(--bd);overflow:hidden;margin:6px 0 10px}.prog i{display:block;height:100%;background:var(--ok)}
+.modal{position:fixed;inset:0;background:#0008;display:none;align-items:center;justify-content:center;padding:16px;z-index:50}.modal.on{display:flex}
+.box{background:var(--sf);border-radius:14px;padding:18px;width:min(460px,100%);max-height:90vh;overflow:auto}.row{display:flex;gap:8px;justify-content:flex-end;margin-top:8px}
+.in{border-left:4px solid var(--ok)}body.out #nav{display:none}header{display:flex;justify-content:space-between;align-items:center;gap:8px}header .btn{min-height:34px;padding:4px 10px}.login{max-width:380px;margin:30px auto}.er{color:var(--er);min-height:1.2em}.wab{display:inline-flex;width:38px;height:38px;flex-shrink:0;border-radius:9px}.wab svg{width:100%;height:100%}.seg{display:flex;gap:4px;background:var(--ac2);padding:4px;border-radius:11px;margin:12px 0}.seg button{flex:1;border:0;background:none;color:var(--tx);font:inherit;padding:9px;border-radius:8px;cursor:pointer;font-weight:600}.seg button.on{background:var(--ac);color:#fff}.logo{display:none;align-items:center;justify-content:center;height:64px;margin-bottom:10px;border:1px dashed #ffffff40;border-radius:10px;color:var(--ni);font-size:.78rem;cursor:pointer;overflow:hidden;background:#ffffff0d;flex:none}.logo img{width:100%;height:auto;max-height:120px;object-fit:contain;display:block}.logo.has{height:auto;border:0;background:none;margin-bottom:14px}.hl{height:28px;max-width:120px;object-fit:contain;margin-right:8px;vertical-align:middle}#st{display:flex;align-items:center;gap:6px;min-width:0}.who{max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:.9rem;color:var(--tx)}#br{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}.item>div:first-child{flex:1 1 150px;min-width:0;overflow-wrap:anywhere}.stat b{overflow-wrap:anywhere}input,select,textarea{max-width:100%;min-width:0}input[type=date],input[type=time]{min-height:42px;-webkit-appearance:none;appearance:none}.sh{display:none}.dsk{display:none}.pals{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 12px}.pal{display:flex;align-items:center;gap:6px;border:2px solid var(--bd);background:var(--sf);color:var(--tx);border-radius:10px;padding:8px 10px;font:inherit;cursor:pointer}.pal.on{border-color:var(--ac)}.nvf{display:none}@media(min-width:800px){#nav .nvf{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding:10px 4px 4px;border-top:1px solid #ffffff1a;opacity:.7}#nav .nvf:hover{opacity:1}}#nav .dots{display:flex;gap:8px}#nav .nvf button{flex:none;display:inline-flex;align-items:center;justify-content:center;margin:0;padding:0;border-radius:50%}#nav .dot{width:16px;height:16px;border:2px solid transparent;cursor:pointer}#nav .dot.sel{border-color:#fff}#nav .gi{width:26px;height:26px;background:none;border:0;color:var(--ni)}#nav .gi .ic{width:16px;height:16px;margin:0}.pal i{width:16px;height:16px;border-radius:50%;display:inline-block}@media(min-width:800px){.dsk{display:block}}@media(max-width:560px){header small{display:none}.lg{display:none}.sh{display:inline}.item{flex-wrap:wrap}.item>.acts{width:100%;justify-content:flex-start}#main{padding:12px}.who{max-width:90px}#st .badge.ok{display:none}#nav button{min-width:0;font-size:.6rem;padding:6px 0;white-space:nowrap}.stat b{font-size:1.1rem}}
+</style></head><body>
+<header><span id="br">Evently<small>protótipo</small></span><span id="st"></span></header>
+<div id="main"><p class="mu" style="padding:20px">Carregando…</p></div><nav id="nav"></nav><div class="modal" id="modal"></div>
+<script type="module">
+import {initializeApp} from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
+import {getAuth,onAuthStateChanged,signInWithEmailAndPassword,createUserWithEmailAndPassword,updateProfile,signOut} from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js';
+import {initializeFirestore,persistentLocalCache,persistentMultipleTabManager,doc,setDoc,deleteDoc,collection,onSnapshot} from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
+import {firebaseConfig} from './firebase-config.js';
+const OK=!!firebaseConfig.apiKey&&firebaseConfig.apiKey!='COLE_AQUI';
+const app=OK?initializeApp(firebaseConfig):null,auth=OK?getAuth(app):null,db=OK?initializeFirestore(app,{localCache:persistentLocalCache({tabManager:persistentMultipleTabManager()})}):null;
+let D,U=null,ready=false;
+const lsGet=(k,d)=>{try{const v=JSON.parse(localStorage.getItem(k));return v==null?d:v}catch(e){return d}};
+const lsSet=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+const addD=n=>{const d=new Date();d.setDate(d.getDate()+n);return new Date(d-d.getTimezoneOffset()*6e4).toISOString().slice(0,10)};
+function seed(){return{clients:[{id:'c1',nome:'Marina e Rafael',tel:'(14) 99999-0001',email:'marina@exemplo.com',obs:''},{id:'c2',nome:'Empresa Alfa',tel:'(14) 3333-0002',email:'rh@alfa.com',obs:'Confraternização anual'}],
+suppliers:[{id:'s1',nome:'Buffet Sabor & Arte',cat:'Buffet',tel:'(14) 98888-0003',email:'',obs:''},{id:'s2',nome:'Foto Momento',cat:'Fotografia',tel:'(14) 98888-0004',email:'',obs:''},{id:'s3',nome:'DJ Beat',cat:'Música/DJ',tel:'',email:'',obs:''}],
+events:[{id:'e1',nome:'Casamento Marina e Rafael',tipo:'Casamento',data:addD(12),hora:'18:00',local:'Chácara Bela Vista',cli:'c1',status:'Confirmado',orc:45000,obs:'Cerimônia ao ar livre',sup:[{id:'x1',forn:'s1',serv:'Jantar para 120',valor:18000,conf:'1'},{id:'x2',forn:'s2',serv:'Foto e vídeo',valor:4500,conf:'0'}]},
+{id:'e2',nome:'Confraternização Alfa',tipo:'Corporativo',data:addD(40),hora:'20:00',local:'Salão Central',cli:'c2',status:'Planejamento',orc:15000,obs:'',sup:[]}],
+costs:[{id:'k1',desc:'Sinal do buffet',ev:'e1',forn:'s1',cat:'Buffet',valor:12000,venc:addD(-2),pago:'0'},{id:'k2',desc:'Fotografia',ev:'e1',forn:'s2',cat:'Fotografia',valor:4500,venc:addD(5),pago:'0'},{id:'k3',desc:'Reserva do salão',ev:'e2',forn:'',cat:'Espaço',valor:3000,venc:addD(15),pago:'1'}],
+receipts:[{id:'r1',cli:'c1',ev:'e1',desc:'Honorários de cerimonial — 1ª parcela',valor:3000,forma:'PIX',data:addD(-1),pago:'1',pagoEm:addD(-1)},{id:'r2',cli:'c1',ev:'e1',desc:'Honorários de cerimonial — saldo',valor:3000,forma:'Transferência',data:addD(10),pago:'0'},{id:'r3',cli:'c2',ev:'e2',desc:'Honorários de cerimonial',valor:2500,forma:'Boleto',data:addD(20),pago:'0'}],guests:[{id:'g1',ev:'e1',nome:'Ana Souza',mesa:'1',comps:[{n:'Paulo Souza',in:''}],tel:'',obs:'',in:''},{id:'g2',ev:'e1',nome:'Carlos Lima',mesa:'1',acomp:0,tel:'',obs:'',in:''},{id:'g3',ev:'e1',nome:'Beatriz Rocha',mesa:'2',comps:[{n:'Lucas Rocha',in:''},{n:'Julia Rocha',in:''}],tel:'',obs:'',in:''}]}}
+const KINDS=['clients','suppliers','events','costs','receipts','guests'];
+let LAST={},UNS=[];
+const strip=o=>{const c=Object.assign({},o);delete c.dirty;return JSON.parse(JSON.stringify(c))};
+function stopSync(){UNS.forEach(f=>f());UNS=[];ready=false}
+function startSync(){
+ D={clients:[],suppliers:[],events:[],costs:[],receipts:[],guests:[],logo:'',pal:''};LAST={};ready=false;
+ const base='accounts/'+U.id;
+ UNS.push(onSnapshot(doc(db,base),{includeMetadataChanges:true},s=>{const m=s.data()||{},j=JSON.stringify({logo:m.logo||'',pal:m.pal||''});
+  if(!ready||j!=LAST.meta){D.logo=m.logo||'';D.pal=m.pal||'';LAST.meta=j;ready=true;render()}}));
+ KINDS.forEach(k=>{LAST[k]={};UNS.push(onSnapshot(collection(db,base+'/'+k),{includeMetadataChanges:true},s=>{
+  const arr=s.docs.map(d=>{const x=d.data();if(k=='guests'&&d.metadata.hasPendingWrites)x.dirty=1;return x});
+  LAST[k]={};arr.forEach(x=>{LAST[k][x.id]=JSON.stringify(strip(x))});
+  if(JSON.stringify(arr)!=JSON.stringify(D[k])){D[k]=arr;render()}}))});
+}
+function save(){
+ if(!U||!D||!ready)return;const base='accounts/'+U.id;
+ KINDS.forEach(k=>{const old=LAST[k]||(LAST[k]={}),seen={};
+  D[k].forEach(x=>{const o=strip(x),j=JSON.stringify(o);seen[x.id]=1;if(old[x.id]!==j){old[x.id]=j;setDoc(doc(db,base+'/'+k,x.id),o).catch(console.error)}});
+  Object.keys(old).forEach(id=>{if(!seen[id]){delete old[id];deleteDoc(doc(db,base+'/'+k,id)).catch(console.error)}})});
+ const m={logo:D.logo||'',pal:D.pal||''},j=JSON.stringify(m);
+ if(j!=LAST.meta){LAST.meta=j;setDoc(doc(db,base),m,{merge:true}).catch(console.error)}}
+const uid=()=>Math.random().toString(36).slice(2,9);
+const $=s=>document.querySelector(s);
+const brl=n=>(+n||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+const fd=d=>d?d.split('-').reverse().join('/'):'—';
+const days=d=>Math.round((new Date(d+'T00:00')-new Date(addD(0)+'T00:00'))/864e5);
+const rel=n=>n<0?'há '+(-n)+' dia(s)':n==0?'hoje':n==1?'amanhã':'em '+n+' dias';
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const byId=(a,id)=>D[a].find(x=>x.id==id)||{};
+const sum=(a,f)=>a.reduce((s,x)=>s+(+f(x)||0),0);
+const IC={painel:'<rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/>',eventos:'<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>',convidados:'<rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2m1 10 2 2 4-4"/>',financeiro:'<circle cx="12" cy="12" r="10"/><path d="M15 9.5a3 3 0 0 0-3-1.5c-1.7 0-3 .9-3 2s1.3 1.8 3 2 3 .9 3 2-1.3 2-3 2a3 3 0 0 1-3-1.5M12 6v2m0 8v2"/>',clientes:'<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',fornecedores:'<path d="m3 9 1-5h16l1 5M4 9v11h16V9M9 20v-6h6v6"/>',img:'<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/>'};
+const ico=k=>`<svg class="ic" viewBox="0 0 24 24">${IC[k]}</svg>`;
+const wa=t=>{let d=String(t||'').replace(/\D/g,'');if(d.length<10)return '';if(d.length<=11)d='55'+d;return `<a class="wab" href="https://wa.me/${d}" target="_blank" rel="noopener" title="Chamar no WhatsApp" aria-label="Chamar no WhatsApp"><svg viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#1fa855"/><path d="M7 6h10a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2h-5l-4 3v-3H7a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z" fill="#fff"/></svg></a>`};
+const nowT=()=>new Date().toTimeString().slice(0,5);
+const tp=g=>1+(g.comps||[]).length,ap=g=>(g.comps||[]).filter(c=>c.in).length,np=g=>(g.in?1:0)+ap(g);
+const mig=()=>{D.receipts=D.receipts||[];D.guests.forEach(g=>{if(!g.comps)g.comps=Array.from({length:+g.acomp||0},(_,i)=>({n:'Acompanhante '+(i+1),in:i<(+g.ap||0)?nowT():''}))})};
+const PAL=[{id:'rose',n:'Rosé',l:['#9b4d63','#f4e4e9','#2b1f24'],d:['#d9708e','#3a2830','#110c0e']},{id:'indigo',n:'Índigo',l:['#4f46e5','#e8e7fd','#1b1a3a'],d:['#8b86f5','#2a2850','#0e0d22']},{id:'esm',n:'Esmeralda',l:['#0f7b6c','#dcf3ee','#10282a'],d:['#2fb59f','#1c3a36','#091a1b']}];
+function pal(){const p=PAL.find(x=>x.id==(D&&D.pal))||PAL[0],c=matchMedia('(prefers-color-scheme: dark)').matches?p.d:p.l,s=document.documentElement.style;s.setProperty('--ac',c[0]);s.setProperty('--ac2',c[1]);s.setProperty('--nv',c[2])}
+function brand(){$('#br').innerHTML='Evently<small>protótipo</small>'}
+const nvFoot=()=>`<div class="nvf"><span class="dots">${PAL.map(p=>`<button class="dot ${(D.pal||'rose')==p.id?'sel':''}" data-a="pal" data-i="${p.id}" title="Paleta ${p.n}" aria-label="Paleta ${p.n}" style="background:${p.l[0]}"></button>`).join('')}</span><button class="gi" data-a="logo" title="Logo da empresa" aria-label="Logo da empresa">${ico('img')}</button></div>`;
+function logoModal(){const m=$('#modal');m.innerHTML=`<div class="box"><h3>Logo da empresa</h3><p class="mu">Aparece no topo do menu lateral. Use PNG ou JPG, de preferência com fundo transparente.</p><input type="file" id="lf" accept="image/*"><div class="row"><button class="btn dng" id="lr">Remover logo</button><button class="btn" id="cx">Fechar</button></div></div>`;m.classList.add('on');$('#cx').onclick=close;$('#lr').onclick=()=>{D.logo='';close();save();render()};$('#lf').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const s=Math.min(1,480/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=im.width*s;c.height=im.height*s;c.getContext('2d').drawImage(im,0,0,c.width,c.height);D.logo=c.toDataURL('image/webp',0.9);close();save();render()};im.src=r.result};r.readAsDataURL(f)}}
+const opts=a=>()=>a.map(x=>[x,x]);
+const NAV=[['painel','📊','Painel'],['eventos','🎉','Eventos'],['convidados','✅','Convidados'],['financeiro','💰','Financeiro'],['clientes','👤','Clientes'],['fornecedores','🏷️','Fornecedores']];
+const ST=['Planejamento','Confirmado','Concluído','Cancelado'],TP=['Casamento','Aniversário','Formatura','Corporativo','Outro'],CAT=['Buffet','Espaço','Decoração','Fotografia','Música/DJ','Bolo e doces','Cerimonial','Transporte','Outros'];
+const evO=()=>D.events.map(e=>[e.id,e.nome]),fnO=()=>[['','—']].concat(D.suppliers.map(s=>[s.id,s.nome])),clO=()=>[['','—']].concat(D.clients.map(c=>[c.id,c.nome]));
+const TEL={k:'tel',l:'Telefone',t:'tel'},EM={k:'email',l:'E-mail',t:'email'},OB={k:'obs',l:'Observações',t:'textarea'};
+const CFG={
+clients:{t:'cliente',p:'Clientes',f:[{k:'nome',l:'Nome',req:1},TEL,EM,OB]},
+suppliers:{t:'fornecedor',p:'Fornecedores',f:[{k:'nome',l:'Nome / empresa',req:1},{k:'cat',l:'Categoria',t:'select',o:opts(CAT)},TEL,EM,OB]},
+events:{t:'evento',p:'Eventos',def:()=>({sup:[]}),f:[{k:'nome',l:'Nome do evento',req:1},{k:'tipo',l:'Tipo',t:'select',o:opts(TP)},{k:'data',l:'Data',t:'date',req:1},{k:'hora',l:'Horário',t:'time'},{k:'local',l:'Local'},{k:'cli',l:'Cliente',t:'select',o:clO},{k:'status',l:'Status',t:'select',o:opts(ST)},{k:'orc',l:'Orçamento (R$)',t:'number'},OB]},
+receipts:{t:'recebimento',p:'Recebimentos',f:[{k:'cli',l:'Cliente',t:'select',o:()=>D.clients.map(c=>[c.id,c.nome])},{k:'ev',l:'Evento (opcional)',t:'select',o:()=>[['','—']].concat(evO())},{k:'desc',l:'Descrição',req:1},{k:'valor',l:'Valor (R$)',t:'number'},{k:'forma',l:'Forma de pagamento',t:'select',o:opts(['PIX','Transferência','Dinheiro','Cartão','Boleto','Cheque'])},{k:'data',l:'Data combinada',t:'date'},{k:'pago',l:'Situação',t:'select',o:()=>[['0','Pendente'],['1','Recebido']]}]},
+costs:{t:'custo',p:'Custos',f:[{k:'desc',l:'Descrição',req:1},{k:'ev',l:'Evento',t:'select',o:evO},{k:'forn',l:'Fornecedor',t:'select',o:fnO},{k:'cat',l:'Categoria',t:'select',o:opts(CAT)},{k:'valor',l:'Valor (R$)',t:'number'},{k:'venc',l:'Vencimento',t:'date'},{k:'pago',l:'Situação',t:'select',o:()=>[['0','Pendente'],['1','Pago']]}]},
+guests:{t:'convidado',p:'Convidados',def:()=>({in:''}),f:[{k:'nome',l:'Nome',req:1},{k:'mesa',l:'Mesa'},{k:'ct',l:'Acompanhantes (um nome por linha)',t:'textarea'},TEL,OB]},
+sup:{t:'fornecedor do evento',f:[{k:'forn',l:'Fornecedor',t:'select',o:fnO},{k:'serv',l:'Serviço contratado'},{k:'valor',l:'Valor combinado (R$)',t:'number'},{k:'conf',l:'Situação',t:'select',o:()=>[['0','Aguardando'],['1','Confirmado']]}]}};
+const S={tab:'painel',ev:null,gev:'',fev:'',q:'',fin:'empresa'};
+const close=()=>$('#modal').classList.remove('on');
+function form(title,fields,v,ok){
+ const m=$('#modal');
+ m.innerHTML=`<div class="box"><h3>${title}</h3>`+fields.map(f=>`<label>${f.l}${f.t=='select'?`<select name="${f.k}">${f.o().map(o=>`<option value="${esc(o[0])}" ${v[f.k]==o[0]?'selected':''}>${esc(o[1])}</option>`).join('')}</select>`:f.t=='textarea'?`<textarea name="${f.k}" rows="3">${esc(v[f.k])}</textarea>`:`<input name="${f.k}" type="${f.t||'text'}" value="${esc(v[f.k])}">`}</label>`).join('')+`<div class="row"><button class="btn" id="cx">Cancelar</button><button class="btn pri" id="sv">Salvar</button></div></div>`;
+ m.classList.add('on');$('#cx').onclick=close;
+ $('#sv').onclick=()=>{const o={};m.querySelectorAll('[name]').forEach(e=>o[e.name]=e.type=='number'?(+e.value||0):e.value.trim());
+  const r=fields.find(f=>f.req&&!o[f.k]);if(r){m.querySelector('[name="'+r.k+'"]').focus();return}
+  ok(o);close();save();render()};
+}
+function ask(msg,fn){const m=$('#modal');m.innerHTML=`<div class="box"><p>${msg}</p><div class="row"><button class="btn" id="cx">Cancelar</button><button class="btn pri" id="sv">Confirmar</button></div></div>`;m.classList.add('on');$('#cx').onclick=close;$('#sv').onclick=()=>{fn();close();save();render()}}
+function upsert(kind,id,pre,list){
+ const C=CFG[kind],arr=list||D[kind],cur=id?arr.find(x=>x.id==id):null;
+ form((id?'Editar ':'Novo ')+C.t,C.f,kind=='guests'&&cur?Object.assign({},cur,{ct:(cur.comps||[]).map(c=>c.n).join('\n')}):cur||pre||{},o=>{let t=cur;if(t)Object.assign(t,o);else{t=Object.assign({id:uid()},C.def?C.def():{},pre||{},o);arr.push(t)}if(kind=='guests'){const old=t.comps||[];t.comps=(o.ct||'').split('\n').map(s=>s.trim()).filter(Boolean).map(n=>({n,in:(old.find(c=>c.n==n)||{}).in||''}));delete t.ct;t.dirty=1}});
+}
+function remove(kind,id){ask('Excluir este '+CFG[kind].t+'?',()=>{
+ D[kind]=D[kind].filter(x=>x.id!=id);
+ if(kind=='events'){D.guests=D.guests.filter(g=>g.ev!=id);D.costs=D.costs.filter(c=>c.ev!=id);S.ev=null}
+ if(kind=='clients')D.events.forEach(e=>{if(e.cli==id)e.cli=''});
+ if(kind=='suppliers'){D.events.forEach(e=>e.sup=e.sup.filter(s=>s.forn!=id));D.costs.forEach(c=>{if(c.forn==id)c.forn=''})}})}
+const empty='<p class="mu">Nada por aqui ainda.</p>';
+const hdr=(t,k,x)=>`<div class="bar"><h2>${t}</h2><button class="btn pri" data-a="add" data-i="${k}">+ ${x||'Novo'}</button></div>`;
+const acts=(k,id)=>`<div class="acts"><button class="btn" data-a="edit" data-i="${k}" data-j="${id}">Editar</button><button class="btn dng" data-a="del" data-i="${k}" data-j="${id}">✕</button></div>`;
+const search=()=>`<input class="search" data-a="q" placeholder="Buscar…" value="${esc(S.q)}">`;
+const match=x=>JSON.stringify(x).toLowerCase().includes(S.q.toLowerCase());
+const costState=c=>c.pago=='1'?['Pago','ok']:c.venc&&days(c.venc)<0?['Vencido','er']:['Pendente','wa'];
+function list(kind,sub){
+ const rows=D[kind].filter(match).sort((a,b)=>a.nome.localeCompare(b.nome));
+ return hdr(CFG[kind].p,kind)+search()+(rows.map(x=>`<div class="item"><div><b>${esc(x.nome)}</b><small>${sub(x)}</small></div><div class="acts">${wa(x.tel)}${acts(kind,x.id)}</div></div>`).join('')||empty);
+}
+const V={
+painel(){
+ const up=D.events.filter(e=>e.status!='Concluído'&&e.status!='Cancelado'&&days(e.data)>=0).sort((a,b)=>a.data.localeCompare(b.data));
+ const pend=[];
+ up.forEach(e=>{
+  if(!e.sup.length)pend.push([e.id,e.nome,'Sem fornecedores definidos']);
+  const nc=e.sup.filter(s=>s.conf!='1').length;if(nc)pend.push([e.id,e.nome,nc+' fornecedor(es) aguardando confirmação']);
+  if(!D.guests.some(g=>g.ev==e.id))pend.push([e.id,e.nome,'Lista de convidados vazia']);
+  const t=sum(e.sup,s=>s.valor);if(e.orc&&t>e.orc)pend.push([e.id,e.nome,'Fornecedores acima do orçamento em '+brl(t-e.orc)]);
+ });
+ const open=D.costs.filter(c=>c.pago!='1'),late=open.filter(c=>c.venc&&days(c.venc)<0);
+ D.receipts.filter(r=>r.pago!='1'&&r.data&&days(r.data)<=3).forEach(r=>pend.unshift([r.ev,'Receber de '+(byId('clients',r.cli).nome||'cliente'),(days(r.data)<0?'Atrasado desde ':'Vence em ')+fd(r.data)+' ('+brl(r.valor)+')']));
+ late.forEach(c=>pend.unshift([c.ev,c.desc,'Pagamento vencido ('+brl(c.valor)+', '+fd(c.venc)+')']));
+ open.filter(c=>c.venc&&days(c.venc)>=0&&days(c.venc)<=7).forEach(c=>pend.push([c.ev,c.desc,'Vence '+rel(days(c.venc))+' ('+brl(c.valor)+')']));
+ return `<h2>Painel</h2><div class="grid" style="margin-top:12px"><div class="stat"><b>${up.filter(e=>days(e.data)<=30).length}</b><small>eventos nos próximos 30 dias</small></div><div class="stat"><b>${brl(sum(D.receipts.filter(r=>r.pago!='1'),r=>r.valor))}</b><small>a receber (empresa)</small></div><div class="stat"><b style="color:var(--er)">${late.length}</b><small>pagamentos vencidos</small></div><div class="stat"><b>${pend.length}</b><small>pendências</small></div></div>
+ <div class="bar"><h3>Próximos eventos</h3></div>${up.slice(0,5).map(e=>`<div class="item click" data-a="openev" data-i="${e.id}"><div><b>${esc(e.nome)}</b><small>${fd(e.data)} ${e.hora||''} · ${esc(e.local)||'local a definir'}</small></div><span class="badge">${rel(days(e.data))}</span></div>`).join('')||empty}
+ <div class="bar"><h3>Pendências</h3></div>${pend.map(p=>`<div class="item click" data-a="openev" data-i="${p[0]}"><div><b>${esc(p[1])}</b><small>${esc(p[2])}</small></div><span class="mu">›</span></div>`).join('')||'<p class="mu">Tudo em dia.</p>'}
+ <p style="margin-top:24px"><button class="btn dng" data-a="reset">Restaurar dados de exemplo</button> <button class="btn" data-a="clear">Apagar todos os dados</button></p>`},
+eventos(){
+ if(S.ev)return V.evd();
+ const rows=D.events.filter(match).sort((a,b)=>a.data.localeCompare(b.data));
+ return hdr('Eventos','events','Novo evento')+search()+(rows.map(e=>`<div class="item click" data-a="openev" data-i="${e.id}"><div><b>${esc(e.nome)}</b><small>${fd(e.data)} · ${esc(byId('clients',e.cli).nome||'sem cliente')} · ${e.sup.length} fornecedor(es)</small></div><span class="badge ${e.status=='Confirmado'?'ok':e.status=='Cancelado'?'er':''}">${e.status}</span></div>`).join('')||empty)},
+evd(){
+ const e=byId('events',S.ev);if(!e.id){S.ev=null;return V.eventos()}
+ const cs=D.costs.filter(c=>c.ev==e.id),tot=sum(cs,c=>c.valor),con=sum(e.sup,s=>s.valor),gs=D.guests.filter(g=>g.ev==e.id);
+ return `<button class="btn" data-a="back">← Eventos</button><div class="bar"><h2>${esc(e.nome)}</h2>${acts('events',e.id)}</div>
+ <div class="card"><p><span class="badge">${e.status}</span> ${e.tipo} · ${fd(e.data)} ${e.hora||''} <span class="mu">(${rel(days(e.data))})</span></p><p>Local: ${esc(e.local)||'—'}</p><p>Cliente: ${esc(byId('clients',e.cli).nome)||'—'}</p>${e.obs?`<p class="mu">${esc(e.obs)}</p>`:''}</div>
+ <div class="bar"><h3>Fornecedores</h3><button class="btn pri" data-a="addsup">+ Fornecedor</button></div>
+ ${e.sup.map(s=>{const f=byId('suppliers',s.forn);return `<div class="item"><div><b>${esc(f.nome||'(removido)')}</b><small>${esc(s.serv)||esc(f.cat)||''} · <b>${brl(s.valor)}</b></small></div><div class="acts">${wa(f.tel)}<button class="btn ${s.conf=='1'?'ok':'wa'}" data-a="togsup" data-i="${s.id}">${s.conf=='1'?'Confirmado':'Aguardando'}</button><button class="btn" data-a="editsup" data-i="${s.id}">✎</button><button class="btn dng" data-a="rmsup" data-i="${s.id}">✕</button></div></div>`}).join('')||'<p class="mu">Nenhum fornecedor vinculado.</p>'}
+ <div class="bar"><h3>Financeiro do evento</h3><button class="btn" data-a="finev">Ver custos</button></div>
+ <div class="grid"><div class="stat"><b>${brl(e.orc)}</b><small>orçamento</small></div><div class="stat"><b style="color:${e.orc&&con>e.orc?'var(--er)':'inherit'}">${brl(con)}</b><small>fornecedores contratados</small></div><div class="stat"><b>${brl(tot)}</b><small>custos lançados</small></div><div class="stat"><b>${brl(sum(cs.filter(c=>c.pago=='1'),c=>c.valor))}</b><small>já pago</small></div></div>
+ <div class="bar"><h3>Convidados</h3><button class="btn pri" data-a="checkin">Abrir check-in</button></div>
+ <p class="mu">${gs.length} convite(s) · ${sum(gs,tp)} pessoa(s) esperadas</p>`},
+convidados(){
+ if(!D.events.length)return '<h2>Convidados</h2><p class="mu">Cadastre um evento primeiro.</p>';
+ if(!byId('events',S.gev).id)S.gev=D.events[0].id;
+ const all=D.guests.filter(g=>g.ev==S.gev),p=tp,tot=sum(all,p),pres=sum(all,np);
+ const rows=all.filter(match).sort((a,b)=>a.nome.localeCompare(b.nome));
+ return `<h2>Convidados · check-in</h2><select data-a="gev" style="margin-top:10px">${D.events.map(e=>`<option value="${e.id}" ${e.id==S.gev?'selected':''}>${esc(e.nome)} — ${fd(e.data)}</option>`).join('')}</select>
+ <div class="card"><b>${pres} de ${tot}</b> pessoas presentes<div class="prog"><i style="width:${tot?pres/tot*100:0}%"></i></div><div class="acts" style="justify-content:flex-start"><button class="btn pri" data-a="addg">+ Convidado</button><button class="btn" data-a="bulk">Colar lista</button></div></div>
+ ${search()}${rows.map(g=>`<div class="item ${np(g)==p(g)?'in':''}" style="flex-wrap:wrap"><div><b>${esc(g.nome)}</b><small>${g.mesa?'Mesa '+esc(g.mesa)+' · ':''}${np(g)}/${p(g)} presentes${g.dirty?' · a sincronizar':''}</small></div><div class="acts"><button class="btn big ${np(g)==p(g)?'':'pri'}" data-a="tog" data-i="${g.id}">${np(g)==p(g)?'Desfazer':'Check-in todos'}</button><button class="btn" data-a="edit" data-i="guests" data-j="${g.id}">Editar</button></div><div class="acts" style="width:100%;justify-content:flex-start;align-items:center"><button class="btn ${g.in?'ok':''}" data-a="tit" data-i="${g.id}">${esc(g.nome)} (convidado)${g.in?' · '+g.in:''}</button>${(g.comps||[]).map((c,j)=>`<button class="btn ${c.in?'ok':''}" data-a="cmp" data-i="${g.id}" data-j="${j}">${esc(c.n)}${c.in?' · '+c.in:''}</button>`).join('')}</div></div>`).join('')||empty}`},
+financeiro(){
+ const tb=`<h2>Financeiro</h2><div class="seg"><button class="${S.fin=='empresa'?'on':''}" data-a="fin" data-i="empresa">Empresa</button><button class="${S.fin=='eventos'?'on':''}" data-a="fin" data-i="eventos">Eventos</button></div>`;
+ return tb+(S.fin=='eventos'?'<p class="mu">Custos pagos com o dinheiro do cliente. Não entram no caixa da empresa.</p>'+V.evFin():V.empresa())},
+empresa(){
+ const L=D.receipts.slice().sort((a,b)=>((a.pago=='1')-(b.pago=='1'))||(a.data||'9').localeCompare(b.data||'9')),pd=L.filter(r=>r.pago!='1'),late=pd.filter(r=>r.data&&days(r.data)<0);
+ return `${hdr('A receber dos clientes','receipts','Novo recebimento')}<p class="mu">Pagamentos dos clientes à cerimonialista (honorários).</p><div class="grid"><div class="stat"><b style="color:var(--wa)">${brl(sum(pd,r=>r.valor))}</b><small>a receber</small></div><div class="stat"><b style="color:var(--er)">${late.length}</b><small>em atraso</small></div><div class="stat"><b style="color:var(--ok)">${brl(sum(L.filter(r=>r.pago=='1'),r=>r.valor))}</b><small>já recebido</small></div></div>`+(L.map(r=>{const s=r.pago=='1'?['Recebido','ok']:r.data&&days(r.data)<0?['Atrasado','er']:['Pendente','wa'],en=byId('events',r.ev).nome;return `<div class="item"><div><b>${esc(byId('clients',r.cli).nome||'(sem cliente)')}</b><small>${esc(r.desc)}${en?' · '+esc(en):''}</small><small>${esc(r.forma)} · combinado para ${fd(r.data)}${r.pago=='1'&&r.pagoEm?' · recebido em '+fd(r.pagoEm):''}</small><span class="badge ${s[1]}">${s[0]}</span></div><div class="acts" style="align-items:center"><span class="val">${brl(r.valor)}</span><button class="btn" data-a="recv" data-i="${r.id}">${r.pago=='1'?'Desfazer':'Receber'}</button><button class="btn" data-a="edit" data-i="receipts" data-j="${r.id}">Editar</button><button class="btn dng" data-a="del" data-i="receipts" data-j="${r.id}">✕</button></div></div>`}).join('')||empty)},
+evFin(){
+ const L=D.costs.filter(c=>!S.fev||c.ev==S.fev).sort((a,b)=>(a.venc||'9').localeCompare(b.venc||'9')),t=sum(L,c=>c.valor),pg=sum(L.filter(c=>c.pago=='1'),c=>c.valor);
+ return `${hdr('Custos dos eventos','costs','Novo custo')}<select data-a="fev"><option value="">Todos os eventos</option>${D.events.map(e=>`<option value="${e.id}" ${e.id==S.fev?'selected':''}>${esc(e.nome)}</option>`).join('')}</select>
+ <div class="grid"><div class="stat"><b>${brl(t)}</b><small>total</small></div><div class="stat"><b style="color:var(--ok)">${brl(pg)}</b><small>pago</small></div><div class="stat"><b style="color:var(--wa)">${brl(t-pg)}</b><small>a pagar</small></div></div>
+ ${L.map(c=>{const s=costState(c);return `<div class="item"><div><b>${esc(c.desc)}</b><small>${esc(byId('events',c.ev).nome||'—')} · ${esc(byId('suppliers',c.forn).nome||c.cat||'')} · vence ${fd(c.venc)}</small><span class="badge ${s[1]}">${s[0]}</span></div><div class="acts" style="align-items:center"><span class="val">${brl(c.valor)}</span><button class="btn" data-a="pay" data-i="${c.id}">${c.pago=='1'?'↩':'Pagar'}</button><button class="btn" data-a="edit" data-i="costs" data-j="${c.id}">✎</button></div></div>`}).join('')||empty}`},
+clientes:()=>list('clients',x=>[x.tel,x.email,D.events.filter(e=>e.cli==x.id).length+' evento(s)'].filter(Boolean).map(esc).join(' · ')),
+fornecedores:()=>list('suppliers',x=>[x.cat,x.tel,x.email].filter(Boolean).map(esc).join(' · '))};
+const ev=()=>byId('events',S.ev);
+const A={
+tab(i){S.tab=i;S.ev=null;S.q=''},openev(i){S.tab='eventos';S.ev=i},back(){S.ev=null},
+add(k){upsert(k,null,k=='costs'&&S.ev?{ev:S.ev}:null)},edit(k,id){upsert(k,id)},del(k,id){remove(k,id)},
+addsup(){upsert('sup',null,null,ev().sup)},editsup(i){upsert('sup',i,null,ev().sup)},
+togsup(i){const s=ev().sup.find(x=>x.id==i);s.conf=s.conf=='1'?'0':'1';save()},
+rmsup(i){ask('Remover fornecedor do evento?',()=>{ev().sup=ev().sup.filter(x=>x.id!=i)})},
+finev(){S.fin='eventos';S.fev=S.ev;S.tab='financeiro';S.ev=null},checkin(){S.gev=S.ev;S.tab='convidados';S.ev=null;S.q=''},
+tog(i){const g=byId('guests',i);if(np(g)==tp(g)){g.in='';(g.comps||[]).forEach(c=>c.in='')}else{const h=nowT();g.in=g.in||h;(g.comps||[]).forEach(c=>c.in=c.in||h)}g.dirty=1;save()},
+tit(i){const g=byId('guests',i);g.in=g.in?'':nowT();g.dirty=1;save()},
+cmp(i,j){const g=byId('guests',i),c=g.comps[j];c.in=c.in?'':nowT();g.dirty=1;save()},
+logo(){logoModal()},
+fin(i){S.fin=i},
+pal(i){D.pal=i;save()},
+recv(i){const r=byId('receipts',i);r.pago=r.pago=='1'?'0':'1';r.pagoEm=r.pago=='1'?addD(0):'';save()},
+
+sair(){signOut(auth)},
+pay(i){const c=byId('costs',i);c.pago=c.pago=='1'?'0':'1';save()},
+addg(){upsert('guests',null,{ev:S.gev})},
+bulk(){form('Colar lista de convidados',[{k:'lista',l:'Um nome por linha (opcional: Nome;Mesa)',t:'textarea'}],{},o=>{o.lista.split('\n').map(l=>l.trim()).filter(Boolean).forEach(l=>{const p=l.split(';');D.guests.push({id:uid(),ev:S.gev,nome:p[0].trim(),mesa:(p[1]||'').trim(),comps:[],tel:'',obs:'',in:'',dirty:1})})})},
+reset(){ask('Substituir tudo pelos dados de exemplo?',()=>{const m={logo:D.logo,pal:D.pal};D=Object.assign(seed(),m)})},
+clear(){ask('Apagar todos os dados? Não dá para desfazer.',()=>{const m={logo:D.logo,pal:D.pal};D=Object.assign({clients:[],suppliers:[],events:[],costs:[],receipts:[],guests:[]},m)})}};
+function render(){
+ if(!U){showLogin('in');return}
+ if(!ready){$('#main').innerHTML='<p class="mu">Carregando…</p>';return}
+ document.body.classList.remove('out');mig();pal();
+ $('#nav').innerHTML=`<div class="logo${D.logo?' has':''}" data-a="logo">${D.logo?`<img src="${D.logo}" alt="Logo">`:'Seu logo aqui'}</div>`+NAV.map(n=>`<button class="${S.tab==n[0]?'on':''}" data-a="tab" data-i="${n[0]}">${ico(n[0])}${n[0]=='fornecedores'?'<span class="lg">Fornecedores</span><span class="sh">Fornec.</span>':n[2]}</button>`).join('')+nvFoot();
+ $('#main').innerHTML=V[S.tab]();status();brand();
+}
+document.addEventListener('click',e=>{const b=e.target.closest('button[data-a],.item[data-a],.logo[data-a]');if(!b||!A[b.dataset.a])return;A[b.dataset.a](b.dataset.i,b.dataset.j);render()});
+document.addEventListener('change',e=>{const a=e.target.dataset.a;if(a=='gev'||a=='fev'){S[a]=e.target.value;render()}});
+document.addEventListener('input',e=>{if(e.target.dataset.a!='q')return;S.q=e.target.value;render();const i=$('.search');i.focus();i.setSelectionRange(S.q.length,S.q.length)});
+function status(){const on=navigator.onLine,n=D?D.guests.filter(g=>g.dirty).length:0;$('#st').innerHTML=U?`<b class="who">${esc(U.nome)}</b><span class="badge ${on?'ok':'wa'}">${on?'Online':'Offline'}${n?' · '+n+' a sincronizar':''}</span> <button class="btn" data-a="sair">Sair</button>`:''}
+const AUTHERR={'auth/invalid-credential':'E-mail ou senha incorretos.','auth/user-not-found':'E-mail ou senha incorretos.','auth/wrong-password':'E-mail ou senha incorretos.','auth/email-already-in-use':'Este e-mail já tem conta.','auth/weak-password':'Senha fraca. Use 6 ou mais caracteres.','auth/invalid-email':'E-mail inválido.','auth/network-request-failed':'Sem internet. Conecte-se para entrar.','auth/too-many-requests':'Muitas tentativas. Aguarde um pouco.'};
+function showLogin(mode){
+ document.body.classList.add('out');$('#st').innerHTML='';brand();pal();$('#nav').innerHTML='';const nw=mode=='new';
+ $('#main').innerHTML=`<div class="card login"><h2>${nw?'Criar conta':'Entrar'}</h2><p class="mu">${nw?'Cada cerimonialista tem sua própria conta e seus próprios dados.':'Acesse sua conta de cerimonialista.'}</p>${nw?'<label>Seu nome<input id="ln" autocomplete="name"></label>':''}<label>E-mail<input id="le" type="email" autocomplete="username"></label><label>Senha<input id="lp" type="password" autocomplete="${nw?'new-password':'current-password'}"></label><p class="er" id="lm"></p><button class="btn pri" id="lgo" style="width:100%">${nw?'Criar conta':'Entrar'}</button><p style="text-align:center"><button class="btn" id="lsw">${nw?'Já tenho conta':'Criar uma conta'}</button></p></div>`;
+ $('#lsw').onclick=()=>showLogin(nw?'in':'new');
+ $('#lgo').onclick=async()=>{const m=$('#lm'),e=$('#le').value.trim().toLowerCase(),p=$('#lp').value,n=nw?$('#ln').value.trim():'';
+  if(!e||p.length<6||(nw&&!n)){m.textContent='Preencha todos os campos (senha com 6 ou mais caracteres).';return}
+  m.textContent='';$('#lgo').disabled=true;
+  try{if(nw){const c=await createUserWithEmailAndPassword(auth,e,p);await updateProfile(c.user,{displayName:n});if(U){U.nome=n;render()}}else await signInWithEmailAndPassword(auth,e,p)}
+  catch(x){m.textContent=AUTHERR[x.code]||'Não foi possível entrar. Tente novamente.';$('#lgo').disabled=false}}
+}
+window.addEventListener('online',()=>{save();render()});window.addEventListener('offline',status);matchMedia('(prefers-color-scheme: dark)').addEventListener('change',pal);
+if(OK)onAuthStateChanged(auth,u=>{stopSync();if(u){U={id:u.uid,nome:u.displayName||u.email.split('@')[0],email:u.email};S.tab='painel';S.ev=null;startSync()}else{U=null;D=null;render()}});
+else $('#main').innerHTML='<div class="card login"><h2>Configuração pendente</h2><p class="mu">Preencha o arquivo firebase-config.js com os dados do seu projeto Firebase. Veja o LEIAME.md.</p></div>';
+if('serviceWorker' in navigator)navigator.serviceWorker.register('/sw.js').catch(()=>{});
+</script></body></html>
