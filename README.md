@@ -44,7 +44,7 @@ O projeto não requer etapa de build. Como utiliza módulos JavaScript, Firebase
 
 As regras deste projeto limitam a leitura e a gravação ao usuário autenticado correspondente ao identificador da conta. A configuração do Firebase para Web é usada no navegador; a proteção dos dados deve ser feita pelas regras do Firestore, não pela ocultação da chave de configuração.
 
-Para mais detalhes sobre a configuração e a publicação, consulte [`LEIAME.md`](./LEIAME.md).
+As instruções de configuração e publicação estão reunidas neste README.
 
 ## Estrutura dos dados
 

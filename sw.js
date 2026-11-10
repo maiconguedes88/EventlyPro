@@ -1,9 +1,73 @@
-const V='evently-v1',SHELL=['/','/index.html','/firebase-config.js','/manifest.webmanifest','/icon.svg','/icon-192.png','/icon-512.png'];
-self.addEventListener('install',e=>{e.waitUntil(caches.open(V).then(c=>c.addAll(SHELL)).then(()=>self.skipWaiting()))});
-self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!=V).map(x=>caches.delete(x)))).then(()=>self.clients.claim()))});
-self.addEventListener('fetch',e=>{const r=e.request,u=new URL(r.url);
- if(r.method!='GET')return;
- const same=u.origin==location.origin,sdk=u.hostname=='www.gstatic.com'&&u.pathname.startsWith('/firebasejs/');
- if(!same&&!sdk)return;
- if(r.mode=='navigate'){e.respondWith(fetch(r).then(x=>{const c=x.clone();caches.open(V).then(h=>h.put('/index.html',c));return x}).catch(()=>caches.match('/index.html')));return}
- e.respondWith(caches.match(r).then(hit=>{const net=fetch(r).then(x=>{if(x.ok){const c=x.clone();caches.open(V).then(h=>h.put(r,c))}return x}).catch(()=>hit);return hit||net}))});
+const V = 'evently-v1';
+const SHELL = [
+  '/',
+  '/index.html',
+  '/firebase-config.js',
+  '/manifest.webmanifest',
+  '/icon.svg',
+  '/icon-192.png',
+  '/icon-512.png'
+];
+
+// Pre-cache the app shell so its interface can open without a network connection.
+self.addEventListener('install', event => {
+  event.waitUntil(
+    caches
+      .open(V)
+      .then(cache => cache.addAll(SHELL))
+      .then(() => self.skipWaiting())
+  );
+});
+
+// Remove outdated caches before allowing this worker to control open pages.
+self.addEventListener('activate', event => {
+  event.waitUntil(
+    caches
+      .keys()
+      .then(keys => Promise.all(keys.filter(key => key != V).map(key => caches.delete(key))))
+      .then(() => self.clients.claim())
+  );
+});
+
+self.addEventListener('fetch', event => {
+  const request = event.request;
+  const url = new URL(request.url);
+
+  if (request.method != 'GET') return;
+
+  const sameOrigin = url.origin == location.origin;
+  const firebaseSdk = url.hostname == 'www.gstatic.com' && url.pathname.startsWith('/firebasejs/');
+
+  if (!sameOrigin && !firebaseSdk) return;
+
+  // Keep the latest app document cached and fall back to it when navigation is offline.
+  if (request.mode == 'navigate') {
+    event.respondWith(
+      fetch(request)
+        .then(response => {
+          const cachedResponse = response.clone();
+          caches.open(V).then(cache => cache.put('/index.html', cachedResponse));
+          return response;
+        })
+        .catch(() => caches.match('/index.html'))
+    );
+    return;
+  }
+
+  // Serve cached assets immediately, refreshing the cache in the background.
+  event.respondWith(
+    caches.match(request).then(cachedResponse => {
+      const networkResponse = fetch(request)
+        .then(response => {
+          if (response.ok) {
+            const responseToCache = response.clone();
+            caches.open(V).then(cache => cache.put(request, responseToCache));
+          }
+          return response;
+        })
+        .catch(() => cachedResponse);
+
+      return cachedResponse || networkResponse;
+    })
+  );
+});
