@@ -1,4 +1,4 @@
-const V = 'evently-v2';
+const V = 'evently-v3';
 const SHELL = [
   '/',
   '/index.html',
