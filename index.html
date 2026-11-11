@@ -6,24 +6,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Evently</title>
   <link rel="manifest" href="/manifest.webmanifest">
-  <meta name="theme-color" content="#2b1f24">
-  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#2E6F40">
+  <link rel="icon" href="/icon-192.png" type="image/png">
   <link rel="apple-touch-icon" href="/icon-192.png">
   <style>
     /* Design tokens and theme variants. */
     :root {
-      --bg: #faf7f5;
+      --bg: #f3faf4;
       --sf: #fff;
-      --tx: #2a2320;
-      --mu: #7a6f69;
-      --ac: #9b4d63;
-      --ac2: #f4e4e9;
-      --bd: #e8dfda;
+      --tx: #1b2a21;
+      --mu: #5e7467;
+      --ac: #2E6F40;
+      --ac2: #CFFFDC;
+      --bd: #dbe8de;
       --ok: #2e7d5b;
       --wa: #b8700f;
       --er: #b3382c;
-      --nv: #2b1f24;
-      --ni: #ecdde2;
+      --nv: #12281a;
+      --ni: #e3f4e7;
       color-scheme: light;
       box-sizing: border-box;
       padding-top: env(safe-area-inset-top, 0px)
@@ -31,35 +31,35 @@
 
     @media (prefers-color-scheme:dark) {
       :root:not([data-theme="light"]) {
-        --bg: #1b1617;
-        --sf: #272021;
-        --tx: #f1e9e6;
-        --mu: #a99d98;
-        --ac: #e08aa3;
-        --ac2: #3a2830;
-        --bd: #3a3032;
+        --bg: #0f1a13;
+        --sf: #17241c;
+        --tx: #e9f3ec;
+        --mu: #9db5a5;
+        --ac: #68BA7F;
+        --ac2: #1c3a28;
+        --bd: #27402f;
         --ok: #5cc496;
         --wa: #e5a64d;
         --er: #ef7b6e;
-        --nv: #110c0e;
-        --ni: #ecdde2;
+        --nv: #0a1710;
+        --ni: #e3f4e7;
         color-scheme: dark
       }
     }
 
     :root[data-theme="dark"] {
-      --bg: #1b1617;
-      --sf: #272021;
-      --tx: #f1e9e6;
-      --mu: #a99d98;
-      --ac: #e08aa3;
-      --ac2: #3a2830;
-      --bd: #3a3032;
+      --bg: #0f1a13;
+      --sf: #17241c;
+      --tx: #e9f3ec;
+      --mu: #9db5a5;
+      --ac: #68BA7F;
+      --ac2: #1c3a28;
+      --bd: #27402f;
       --ok: #5cc496;
       --wa: #e5a64d;
       --er: #ef7b6e;
-      --nv: #110c0e;
-      --ni: #ecdde2;
+      --nv: #0a1710;
+      --ni: #e3f4e7;
       color-scheme: dark
     }
 
@@ -734,11 +734,36 @@
         font-size: 1.1rem
       }
     }
+    /* Identidade visual verde: marca, login e contraste dos botões */
+    .bq { height: 30px; width: auto; margin-right: 8px }
+    #br { display: flex; align-items: center }
+    .btn.pri, .seg button.on, #nav button.on { color: var(--onac, #fff) }
+    body.out header { display: none }
+    body.out #main { max-width: none; padding: 0 }
+    .lw { position: relative; min-height: 100vh; min-height: 100dvh; display: grid; place-items: center; padding: 24px; overflow: hidden; background: radial-gradient(120% 90% at 20% 0%, #2b6a3f 0%, #173b26 45%, #0c1f14 100%) }
+    .lf { position: absolute; right: -30px; bottom: -30px; width: 340px; pointer-events: none }
+    .lc { position: relative; width: min(380px, 100%); padding: 28px 26px 24px; border-radius: 26px; background: rgba(10, 28, 18, .62); border: 1px solid rgba(207, 255, 220, .14); backdrop-filter: blur(8px); color: #e3f4e7; box-shadow: 0 24px 60px #0006 }
+    .lbr { display: flex; align-items: center; gap: 10px; font: 700 1.15rem Georgia, 'Times New Roman', serif; color: #CFFFDC }
+    .lb { width: 46px; height: 46px; object-fit: contain }
+    .lc h2 { font: 700 1.7rem/1.1 Georgia, 'Times New Roman', serif; margin: 22px 0 4px }
+    .lc p { color: #a9cdb4 }
+    .lc label { color: #8fbc9d; margin-top: 14px }
+    .lc input { background: transparent; border: 0; border-bottom: 1px solid rgba(207, 255, 220, .35); border-radius: 0; color: #f1fbf3; padding: 9px 2px; margin-bottom: 0 }
+    .lc input:focus { outline: 0; border-bottom-color: #68BA7F }
+    .lc input:-webkit-autofill { -webkit-text-fill-color: #f1fbf3; transition: background-color 9999s }
+    .lc .er { color: #ffb4a8; margin-top: 10px }
+    .lc .er.okm { color: #9fe6b3 }
+    .lbtn { width: 100%; margin-top: 6px; border: 0; border-radius: 14px; background: #68BA7F; color: #0b1d12; font: inherit; font-weight: 600; font-size: .95rem; letter-spacing: .14em; text-transform: uppercase; padding: 14px; cursor: pointer }
+    .lbtn:disabled { opacity: .6 }
+    .lk { background: none; border: 0; color: #e3f4e7; font: inherit; font-weight: 700; cursor: pointer; padding: 0; text-decoration: underline; text-underline-offset: 3px }
+    .ls { text-align: center; margin-top: 16px }
+    .lfp { text-align: right; margin: 8px 0 0 }
+    .lfp .lk { font-weight: 400; font-size: .8rem; color: #a9cdb4 }
   </style>
 </head>
 
 <body>
-  <header><span id="br">Evently<small>protótipo</small></span><span id="st"></span></header>
+  <header><span id="br"><img class="bq" src="/buque.png" alt="">Evently<small>protótipo</small></span><span id="st"></span></header>
   <div id="main">
     <p class="mu" style="padding:20px">Carregando…</p>
   </div>
@@ -746,7 +771,7 @@
   <div class="modal" id="modal"></div>
   <script type="module">
     import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
-    import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, signOut } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js';
+    import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, signOut, sendPasswordResetEmail } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js';
     import { initializeFirestore, persistentLocalCache, persistentMultipleTabManager, doc, setDoc, deleteDoc, collection, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
     import { firebaseConfig } from './firebase-config.js';
 
@@ -826,10 +851,14 @@
     const tp = g => 1 + (g.comps || []).length, ap = g => (g.comps || []).filter(c => c.in).length, np = g => (g.in ? 1 : 0) + ap(g);
     // Convert older guest records to the current companion-list structure.
     const mig = () => { D.receipts = D.receipts || []; D.guests.forEach(g => { if (!g.comps) g.comps = Array.from({ length: +g.acomp || 0 }, (_, i) => ({ n: 'Acompanhante ' + (i + 1), in: i < (+g.ap || 0) ? nowT() : '' })) }) };
-    const PAL = [{ id: 'rose', n: 'Rosé', l: ['#9b4d63', '#f4e4e9', '#2b1f24'], d: ['#d9708e', '#3a2830', '#110c0e'] }, { id: 'indigo', n: 'Índigo', l: ['#4f46e5', '#e8e7fd', '#1b1a3a'], d: ['#8b86f5', '#2a2850', '#0e0d22'] }, { id: 'esm', n: 'Esmeralda', l: ['#0f7b6c', '#dcf3ee', '#10282a'], d: ['#2fb59f', '#1c3a36', '#091a1b'] }];
-    function pal() { const p = PAL.find(x => x.id == (D && D.pal)) || PAL[0], c = matchMedia('(prefers-color-scheme: dark)').matches ? p.d : p.l, s = document.documentElement.style; s.setProperty('--ac', c[0]); s.setProperty('--ac2', c[1]); s.setProperty('--nv', c[2]) }
-    function brand() { $('#br').innerHTML = 'Evently<small>protótipo</small>' }
-    const nvFoot = () => `<div class="nvf"><span class="dots">${PAL.map(p => `<button class="dot ${(D.pal || 'rose') == p.id ? 'sel' : ''}" data-a="pal" data-i="${p.id}" title="Paleta ${p.n}" aria-label="Paleta ${p.n}" style="background:${p.l[0]}"></button>`).join('')}</span><button class="gi" data-a="logo" title="Logo da empresa" aria-label="Logo da empresa">${ico('img')}</button></div>`;
+    const PAL = [
+      { id: 'verde', n: 'Verde', l: ['#2E6F40', '#CFFFDC', '#12281a', '#f3faf4', '#ffffff', '#dbe8de', '#1b2a21', '#5e7467', '#e3f4e7', '#ffffff'], d: ['#68BA7F', '#1c3a28', '#0a1710', '#0f1a13', '#17241c', '#27402f', '#e9f3ec', '#9db5a5', '#e3f4e7', '#0a1710'] },
+      { id: 'dourada', n: 'Dourada', l: ['#9a6b12', '#f8ecc9', '#2b2210', '#fbf8ef', '#ffffff', '#eadfc4', '#2a2416', '#76694e', '#f5ead0', '#ffffff'], d: ['#d4a847', '#3a2f14', '#17110a', '#16130c', '#211c11', '#3d3320', '#f3ecd9', '#b3a583', '#f5ead0', '#1b1405'] },
+      { id: 'prata', n: 'Prata', l: ['#56687a', '#e4e9ee', '#1f262d', '#f4f6f8', '#ffffff', '#d9dfe5', '#1f262d', '#66727e', '#e4e9ee', '#ffffff'], d: ['#a9b7c4', '#2b343c', '#12161a', '#14181c', '#1b2025', '#2f373e', '#e8edf1', '#9aa6b0', '#e4e9ee', '#12161a'] }];
+    const PALK = ['ac', 'ac2', 'nv', 'bg', 'sf', 'bd', 'tx', 'mu', 'ni', 'onac'];
+    function pal() { const p = PAL.find(x => x.id == (D && D.pal)) || PAL[0], c = matchMedia('(prefers-color-scheme: dark)').matches ? p.d : p.l, s = document.documentElement.style; PALK.forEach((k, i) => s.setProperty('--' + k, c[i])) }
+    function brand() { $('#br').innerHTML = '<img class="bq" src="/buque.png" alt="">Evently<small>protótipo</small>' }
+    const nvFoot = () => `<div class="nvf"><span class="dots">${PAL.map(p => `<button class="dot ${(PAL.find(x => x.id == D.pal) || PAL[0]).id == p.id ? 'sel' : ''}" data-a="pal" data-i="${p.id}" title="Paleta ${p.n}" aria-label="Paleta ${p.n}" style="background:${p.l[0]}"></button>`).join('')}</span><button class="gi" data-a="logo" title="Logo da empresa" aria-label="Logo da empresa">${ico('img')}</button></div>`;
     function logoModal() { const m = $('#modal'); m.innerHTML = `<div class="box"><h3>Logo da empresa</h3><p class="mu">Aparece no topo do menu lateral. Use PNG ou JPG, de preferência com fundo transparente.</p><input type="file" id="lf" accept="image/*"><div class="row"><button class="btn dng" id="lr">Remover logo</button><button class="btn" id="cx">Fechar</button></div></div>`; m.classList.add('on'); $('#cx').onclick = close; $('#lr').onclick = () => { D.logo = ''; close(); save(); render() }; $('#lf').onchange = e => { const f = e.target.files[0]; if (!f) return; const r = new FileReader(); r.onload = () => { const im = new Image(); im.onload = () => { const s = Math.min(1, 480 / Math.max(im.width, im.height)), c = document.createElement('canvas'); c.width = im.width * s; c.height = im.height * s; c.getContext('2d').drawImage(im, 0, 0, c.width, c.height); D.logo = c.toDataURL('image/webp', 0.9); close(); save(); render() }; im.src = r.result }; r.readAsDataURL(f) } }
     const opts = a => () => a.map(x => [x, x]);
     const NAV = [['painel', '📊', 'Painel'], ['eventos', '🎉', 'Eventos'], ['convidados', '✅', 'Convidados'], ['financeiro', '💰', 'Financeiro'], ['clientes', '👤', 'Clientes'], ['fornecedores', '🏷️', 'Fornecedores']];
@@ -992,8 +1021,9 @@
     const AUTHERR = { 'auth/invalid-credential': 'E-mail ou senha incorretos.', 'auth/user-not-found': 'E-mail ou senha incorretos.', 'auth/wrong-password': 'E-mail ou senha incorretos.', 'auth/email-already-in-use': 'Este e-mail já tem conta.', 'auth/weak-password': 'Senha fraca. Use 6 ou mais caracteres.', 'auth/invalid-email': 'E-mail inválido.', 'auth/network-request-failed': 'Sem internet. Conecte-se para entrar.', 'auth/too-many-requests': 'Muitas tentativas. Aguarde um pouco.' };
     function showLogin(mode) {
       document.body.classList.add('out'); $('#st').innerHTML = ''; brand(); pal(); $('#nav').innerHTML = ''; const nw = mode == 'new';
-      $('#main').innerHTML = `<div class="card login"><h2>${nw ? 'Criar conta' : 'Entrar'}</h2><p class="mu">${nw ? 'Cada cerimonialista tem sua própria conta e seus próprios dados.' : 'Acesse sua conta de cerimonialista.'}</p>${nw ? '<label>Seu nome<input id="ln" autocomplete="name"></label>' : ''}<label>E-mail<input id="le" type="email" autocomplete="username"></label><label>Senha<input id="lp" type="password" autocomplete="${nw ? 'new-password' : 'current-password'}"></label><p class="er" id="lm"></p><button class="btn pri" id="lgo" style="width:100%">${nw ? 'Criar conta' : 'Entrar'}</button><p style="text-align:center"><button class="btn" id="lsw">${nw ? 'Já tenho conta' : 'Criar uma conta'}</button></p></div>`;
+      $('#main').innerHTML = `<div class="lw"><svg class="lf" viewBox="0 0 300 300" aria-hidden="true"><g fill="none" stroke="#CFFFDC" stroke-width="2" opacity=".14"><path d="M150 300C120 220 130 140 210 90C250 170 230 250 150 300Z"/><path d="M150 300C175 215 170 150 210 90"/><path d="M60 300C40 240 60 180 120 150C140 210 120 270 60 300Z"/><path d="M60 300C75 250 90 200 120 150"/><path d="M240 300C230 260 250 220 290 200C300 250 280 285 240 300Z"/></g></svg><div class="lc"><div class="lbr"><img class="lb" src="/buque-claro.png" alt=""><span>Evently</span></div><h2>${nw ? 'Criar conta' : 'Entrar'}</h2><p>${nw ? 'Cada cerimonialista tem sua própria conta e seus próprios dados.' : 'Acesse sua conta de cerimonialista.'}</p>${nw ? '<label>Seu nome<input id="ln" autocomplete="name"></label>' : ''}<label>E-mail<input id="le" type="email" autocomplete="username"></label><label>Senha<input id="lp" type="password" autocomplete="${nw ? 'new-password' : 'current-password'}"></label>${nw ? '' : '<p class="lfp"><button class="lk" id="lfp">Esqueci a senha</button></p>'}<p class="er" id="lm"></p><button class="lbtn" id="lgo">${nw ? 'Criar conta' : 'Entrar'}</button><p class="ls">${nw ? 'Já tem conta?' : 'Não tem conta?'} <button class="lk" id="lsw">${nw ? 'Entrar' : 'Criar conta'}</button></p></div></div>`;
       $('#lsw').onclick = () => showLogin(nw ? 'in' : 'new');
+      const fp = $('#lfp'); if (fp) fp.onclick = async () => { const m = $('#lm'), e = $('#le').value.trim(); m.className = 'er'; if (!e) { m.textContent = 'Digite seu e-mail acima para receber o link.'; return } try { await sendPasswordResetEmail(auth, e); m.className = 'er okm'; m.textContent = 'Enviamos um link para redefinir a senha no seu e-mail.' } catch (x) { m.textContent = AUTHERR[x.code] || 'Não foi possível enviar o link.' } };
       $('#lgo').onclick = async () => {
         const m = $('#lm'), e = $('#le').value.trim().toLowerCase(), p = $('#lp').value, n = nw ? $('#ln').value.trim() : '';
         if (!e || p.length < 6 || (nw && !n)) { m.textContent = 'Preencha todos os campos (senha com 6 ou mais caracteres).'; return }

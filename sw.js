@@ -1,10 +1,11 @@
-const V = 'evently-v1';
+const V = 'evently-v2';
 const SHELL = [
   '/',
   '/index.html',
   '/firebase-config.js',
   '/manifest.webmanifest',
-  '/icon.svg',
+  '/buque.png',
+  '/buque-claro.png',
   '/icon-192.png',
   '/icon-512.png'
 ];
