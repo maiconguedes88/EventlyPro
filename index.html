@@ -694,9 +694,7 @@
     }
 
     @media(max-width:560px) {
-      header small {
-        display: none
-      }
+      
 
       .lg {
         display: none
@@ -766,11 +764,12 @@
     .lfp { text-align: right; margin: 8px 0 0 }
     .lfp .lk { font-weight: 400; font-size: .8rem; color: #a9cdb4 }
     @media (max-height: 680px) { .lf { display: none } .lc { padding: 18px 22px 16px } .lbr { margin-bottom: 8px; font-size: 1.9rem } .lc label { margin-top: 8px } .lbtn { padding: 12px } .ls { margin-top: 10px } }
+    #br small { margin-left: 8px; padding: 2px 7px; border-radius: 99px; background: var(--ac2); color: var(--ac); font-size: .62rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase }
   </style>
 </head>
 
 <body>
-  <header><span id="br"><span class="bq" aria-hidden="true"></span>Evently<small>protótipo</small></span><span id="st"></span></header>
+  <header><span id="br"><span class="bq" aria-hidden="true"></span>Evently<small>Pro</small></span><span id="st"></span></header>
   <div id="main">
     <p class="mu" style="padding:20px">Carregando…</p>
   </div>
@@ -866,28 +865,35 @@
     function pal() { const p = PAL.find(x => x.id == (D && D.pal)) || PAL[0], c = matchMedia('(prefers-color-scheme: dark)').matches ? p.d : p.l, s = document.documentElement.style; PALK.forEach((k, i) => s.setProperty('--' + k, c[i])) }
     const PDFLAT = s => String(s == null ? '' : s).replace(/[\\()]/g, m => '\\' + m).replace(/[^\x20-\x7e\xa0-\xff]/g, '?');
     const fdt = iso => { const d = new Date(iso); return d.toLocaleDateString('pt-BR') + ' ' + d.toTimeString().slice(0, 5) };
-    function makePdf(e, gs, done) {
-      const W = 595, H = 842, M = 40, pages = [], cut = (t, n) => { t = String(t || ''); return t.length > n ? t.slice(0, n - 3) + '...' : t };
+    function makePdf(e, gs, done, logo) {
+      const W = 595, H = 842, M = 40, MESA = 310, ST = 392, pages = [], cut = (t, n) => { t = String(t || ''); return t.length > n ? t.slice(0, n - 3) + '...' : t };
       let cur, y;
       const T = (x, yy, t, sz, bold, col) => cur.push((col || '0.1 0.1 0.1') + ' rg BT /F' + (bold ? 2 : 1) + ' ' + sz + ' Tf ' + x + ' ' + yy + ' Td (' + PDFLAT(t) + ') Tj ET');
       const vis = (x, yy) => cur.push('0.13 0.6 0.27 RG 2 w 1 J 1 j ' + x + ' ' + (yy + 4) + ' m ' + (x + 4) + ' ' + yy + ' l ' + (x + 11) + ' ' + (yy + 10) + ' l S');
       const xis = (x, yy) => cur.push('0.82 0.16 0.16 RG 2 w 1 J ' + x + ' ' + yy + ' m ' + (x + 10) + ' ' + (yy + 10) + ' l S ' + x + ' ' + (yy + 10) + ' m ' + (x + 10) + ' ' + yy + ' l S');
-      const line = yy => cur.push('0.85 0.85 0.85 RG 0.5 w ' + M + ' ' + yy + ' m ' + (W - M) + ' ' + yy + ' l S');
-      const head = () => { T(M + 24, y, 'Convidado / acompanhantes', 9, 1, '0.4 0.4 0.4'); T(380, y, 'Mesa', 9, 1, '0.4 0.4 0.4'); if (done) T(492, y, 'Status', 9, 1, '0.4 0.4 0.4'); y -= 6; line(y); y -= 16 };
+      const line = yy => cur.push('0.85 0.85 0.85 RG 0.5 w ' + M + ' ' + yy + ' m 450 ' + yy + ' l S');
+      const head = () => { T(M + 24, y, 'Convidado / acompanhantes', 9, 1, '0.4 0.4 0.4'); T(MESA, y, 'Mesa', 9, 1, '0.4 0.4 0.4'); if (done) T(ST - 6, y, 'Status', 9, 1, '0.4 0.4 0.4'); y -= 6; line(y); y -= 16 };
       const newPage = () => { cur = []; pages.push(cur); y = H - M - 10 };
-      const row = (n, nome, mesa, pr, main) => { if (y < M + 30) { newPage(); head() } if (n) T(M, y, n, 10, 0, '0.5 0.5 0.5'); T(M + (main ? 24 : 40), y, cut(nome, main ? 50 : 44), 11, main, main ? '0.1 0.1 0.1' : '0.3 0.3 0.3'); if (mesa) T(380, y, cut(mesa, 14), 10); if (done) (pr ? vis : xis)(498, y - 1); y -= 18 };
+      const row = (n, nome, mesa, pr, main) => { if (y < M + 30) { newPage(); head() } if (n) T(M, y, n, 10, 0, '0.5 0.5 0.5'); T(M + (main ? 24 : 40), y, cut(nome, main ? 36 : 34), 11, main, main ? '0.1 0.1 0.1' : '0.3 0.3 0.3'); if (mesa) T(MESA, y, cut(mesa, 10), 10); if (done) (pr ? vis : xis)(ST, y - 1); y -= 18 };
       newPage();
+      if (logo) { const k = Math.min(120 / logo.w, 44 / logo.h), dw = logo.w * k, dh = logo.h * k; cur.push('q ' + dw.toFixed(1) + ' 0 0 ' + dh.toFixed(1) + ' ' + (W - M - dw).toFixed(1) + ' ' + (H - M + 4 - dh).toFixed(1) + ' cm /Im1 Do Q') }
       const tot = sum(gs, tp), pres = sum(gs, np);
-      T(M, y, cut(e.nome, 40), 18, 1); y -= 22;
-      T(M, y, cut([fd(e.data), e.hora, e.local].filter(Boolean).join('  ·  '), 80), 10, 0, '0.4 0.4 0.4'); y -= 18;
+      T(M, y, cut(e.nome, 34), 18, 1); y -= 22;
+      T(M, y, cut([fd(e.data), e.hora, e.local].filter(Boolean).join('  ·  '), 60), 10, 0, '0.4 0.4 0.4'); y -= 18;
       T(M, y, done ? 'Lista concluída em ' + fdt(e.conc) + '  ·  Compareceram ' + pres + ' de ' + tot + ' pessoas' : 'Lista para conferência  ·  ' + gs.length + ' convite(s)  ·  ' + tot + ' pessoa(s)', 11, 1); y -= 16;
       if (done) { vis(M, y); T(M + 18, y, 'Compareceu', 10); xis(M + 100, y); T(M + 118, y, 'Não compareceu', 10); y -= 20 } else y -= 6;
       head();
       if (!gs.length) T(M, y, 'Nenhum convidado cadastrado.', 11);
       gs.forEach((g, i) => { row((i + 1) + '.', g.nome, g.mesa, !!g.in, true); (g.comps || []).forEach(c => row('', '+ ' + c.n, '', !!c.in, false)) });
+      const gp = gs.filter(g => g.in).length, cs = [].concat(...gs.map(g => g.comps || [])), cp = cs.filter(c => c.in).length, C1 = 210, C2 = 262, C3 = 352;
+      y -= 4; if (y < M + 110) newPage(); line(y + 12); y -= 8;
+      T(M, y, 'TOTAL', 11, 1); T(C1, y, 'Total', 9, 1, '0.4 0.4 0.4'); if (done) { T(C2, y, 'Compareceram', 9, 1, '0.4 0.4 0.4'); T(C3, y, 'Não compareceram', 9, 1, '0.4 0.4 0.4') } y -= 18;
+      const tr = (lab, t, p, bold) => { T(M + 24, y, lab, 11, bold); T(C1 + 4, y, String(t), 11, bold); if (done) { T(C2 + 4, y, String(p), 11, bold, '0.13 0.45 0.22'); T(C3 + 4, y, String(t - p), 11, bold, '0.72 0.12 0.12') } y -= 18 };
+      tr('Convidados', gs.length, gp, 0); tr('Acompanhantes', cs.length, cp, 0); line(y + 12); tr('Total de pessoas', gs.length + cs.length, gp + cp, 1);
       pages.forEach((p, i) => { cur = p; T(M, 24, 'Evently  ·  página ' + (i + 1) + ' de ' + pages.length, 8, 0, '0.55 0.55 0.55') });
       const objs = ['<< /Type /Catalog /Pages 2 0 R >>', '<< /Type /Pages /Kids [' + pages.map((_, i) => (5 + 2 * i) + ' 0 R').join(' ') + '] /Count ' + pages.length + ' >>', '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>', '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>'];
-      pages.forEach((p, i) => { const c = p.join('\n'); objs.push('<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents ' + (6 + 2 * i) + ' 0 R >>'); objs.push('<< /Length ' + c.length + ' >>\nstream\n' + c + '\nendstream') });
+      pages.forEach((p, i) => { const c = p.join('\n'); objs.push('<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R >>' + (logo ? ' /XObject << /Im1 ' + (5 + 2 * pages.length) + ' 0 R >>' : '') + ' >> /Contents ' + (6 + 2 * i) + ' 0 R >>'); objs.push('<< /Length ' + c.length + ' >>\nstream\n' + c + '\nendstream') });
+      if (logo) objs.push('<< /Type /XObject /Subtype /Image /Width ' + logo.w + ' /Height ' + logo.h + ' /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ' + logo.d.length + ' >>\nstream\n' + logo.d + '\nendstream');
       let out = '%PDF-1.4\n'; const offs = [];
       objs.forEach((o, i) => { offs.push(out.length); out += (i + 1) + ' 0 obj\n' + o + '\nendobj\n' });
       const xr = out.length;
@@ -895,10 +901,19 @@
       const u = new Uint8Array(out.length); for (let i = 0; i < out.length; i++) u[i] = out.charCodeAt(i) & 255;
       return new Blob([u], { type: 'application/pdf' });
     }
-    function exportPdf() {
+    async function pdfLogo() {
+      if (!D.logo) return null;
+      try {
+        const im = await new Promise((ok, no) => { const i = new Image(); i.onload = () => ok(i); i.onerror = no; i.src = D.logo });
+        const k = Math.min(1, 400 / Math.max(im.width, im.height)), w = Math.max(1, Math.round(im.width * k)), h = Math.max(1, Math.round(im.height * k)), c = document.createElement('canvas');
+        c.width = w; c.height = h; const x = c.getContext('2d'); x.fillStyle = '#fff'; x.fillRect(0, 0, w, h); x.drawImage(im, 0, 0, w, h);
+        return { w, h, d: atob(c.toDataURL('image/jpeg', 0.92).split(',')[1]) };
+      } catch (err) { return null }
+    }
+    async function exportPdf() {
       const e = byId('events', S.gev); if (!e.id) return;
       const gs = D.guests.filter(g => g.ev == e.id).sort((a, b) => a.nome.localeCompare(b.nome)), done = !!e.conc;
-      const blob = makePdf(e, gs, done), name = 'Convidados - ' + e.nome.replace(/[\\\/:*?"<>|]/g, '').trim() + (done ? ' (final)' : ' (conferência)') + '.pdf';
+      const logo = await pdfLogo(), blob = makePdf(e, gs, done, logo), name = 'Convidados - ' + e.nome.replace(/[\\\/:*?"<>|]/g, '').trim() + (done ? ' (final)' : ' (conferência)') + '.pdf';
       const file = new File([blob], name, { type: 'application/pdf' }), can = !!(navigator.canShare && navigator.canShare({ files: [file] })), url = URL.createObjectURL(blob);
       const msg = (done ? 'Lista final de convidados' : 'Lista de convidados para conferência') + ' — ' + e.nome + ' (' + fd(e.data) + ').';
       const m = $('#modal');
@@ -906,7 +921,7 @@
       m.classList.add('on'); $('#cx').onclick = close;
       if (can) $('#xs').onclick = () => navigator.share({ files: [file], title: name, text: msg }).catch(() => { });
     }
-    function brand() { $('#br').innerHTML = '<span class="bq" aria-hidden="true"></span>Evently<small>protótipo</small>' }
+    function brand() { $('#br').innerHTML = '<span class="bq" aria-hidden="true"></span>Evently<small>Pro</small>' }
     const nvFoot = () => `<div class="nvf"><span class="dots">${PAL.map(p => `<button class="dot ${(PAL.find(x => x.id == D.pal) || PAL[0]).id == p.id ? 'sel' : ''}" data-a="pal" data-i="${p.id}" title="Paleta ${p.n}" aria-label="Paleta ${p.n}" style="background:${p.l[0]}"></button>`).join('')}</span><button class="gi" data-a="logo" title="Logo da empresa" aria-label="Logo da empresa">${ico('img')}</button></div>`;
     function logoModal() { const m = $('#modal'); m.innerHTML = `<div class="box"><h3>Logo da empresa</h3><p class="mu">Aparece no topo do menu lateral. Use PNG ou JPG, de preferência com fundo transparente.</p><input type="file" id="lf" accept="image/*"><div class="row"><button class="btn dng" id="lr">Remover logo</button><button class="btn" id="cx">Fechar</button></div></div>`; m.classList.add('on'); $('#cx').onclick = close; $('#lr').onclick = () => { D.logo = ''; close(); save(); render() }; $('#lf').onchange = e => { const f = e.target.files[0]; if (!f) return; const r = new FileReader(); r.onload = () => { const im = new Image(); im.onload = () => { const s = Math.min(1, 480 / Math.max(im.width, im.height)), c = document.createElement('canvas'); c.width = im.width * s; c.height = im.height * s; c.getContext('2d').drawImage(im, 0, 0, c.width, c.height); D.logo = c.toDataURL('image/webp', 0.9); close(); save(); render() }; im.src = r.result }; r.readAsDataURL(f) } }
     const opts = a => () => a.map(x => [x, x]);
